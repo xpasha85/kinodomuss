@@ -22,7 +22,7 @@ with col1:
     date_start = st.date_input(label='Начало действия пароля', min_value=date.today(),
                                max_value=date.today() + timedelta(days=14), format='DD.MM.YYYY')
 with col2:
-    time_start = st.time_input(label='', value=datetime.now(), label_visibility='hidden',
+    time_start = st.time_input(label='', label_visibility='hidden',
                                step=timedelta(minutes=15))
 col1, col2 = st.columns(2)
 with col1:
