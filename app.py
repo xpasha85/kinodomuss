@@ -38,8 +38,10 @@ with password_expander:
 
 pass_name = st.text_input(label='Название пароля', placeholder='например, Марина') # %d %e %f %g %i %u
 if st.button('Создать'):
-    start_date_time = datetime(date_start.year, date_start.month, date_start.day, time_start.hour, time_start.minute)
-    end_date_time = datetime(date_end.year, date_end.month, date_end.day, time_end.hour, time_end.minute)
+    start_date_time = datetime(date_start.year, date_start.month, date_start.day, time_start.hour, time_start.minute) -
+    timedelta(hours=10)
+    end_date_time = datetime(date_end.year, date_end.month, date_end.day, time_end.hour, time_end.minute) -
+    timedelta(hours=10)
     if end_date_time.timestamp() - start_date_time.timestamp() < 0:
         st.error('Дата окончания действия должна быть больше даты начала')
         st.stop()
@@ -52,8 +54,8 @@ if st.button('Создать'):
         result = ttlock.set_custom_pass(start_date_time, end_date_time, pass_name, False, password)
     if result.get('status') == 'ok':
         st.text(f'Пароль успешно создан. Действие пароля c\n'
-                f'{start_date_time.strftime("%d.%m.%Y %H:%M")} до \n'
-                f'{end_date_time.strftime("%d.%m.%Y %H:%M")}. Пароль:')
+                f'{(start_date_time - timedelta(hours=10)).strftime("%d.%m.%Y %H:%M")} до \n'
+                f'{(end_date_time - timedelta(hours=10)).strftime("%d.%m.%Y %H:%M")}. Пароль:')
         st.header(result.get('password'))
     if result.get('status') == 'err':
         st.error(result.get('description'))
