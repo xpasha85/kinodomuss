@@ -10,3 +10,7 @@ ErrorGetPass = {
     'status': 'err',
     'description': 'Ошибка получения пароля. Попробуйте еще раз',
 }
+ErrorCodeExist = {
+    'status': 'err',
+    'description': 'Такой пароль уже существует. Введите другое значение.'
+}

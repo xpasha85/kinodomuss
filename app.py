@@ -36,12 +36,12 @@ password_expander = st.expander('Ввод пароля', expanded=False)
 with password_expander:
     password = str(st.number_input('', disabled=is_random, min_value=1000, value=None, placeholder=768458, format='%d'))
 
-pass_name = st.text_input(label='Название пароля', placeholder='например, Марина') # %d %e %f %g %i %u
+pass_name = st.text_input(label='Название пароля', placeholder='например, Марина')
 if st.button('Создать'):
-    start_date_time = datetime(date_start.year, date_start.month, date_start.day, time_start.hour, time_start.minute) -
-    timedelta(hours=10)
-    end_date_time = datetime(date_end.year, date_end.month, date_end.day, time_end.hour, time_end.minute) -
-    timedelta(hours=10)
+    start_date_time = datetime(date_start.year, date_start.month, date_start.day,
+                               time_start.hour, time_start.minute) - timedelta(hours=10)
+    end_date_time = datetime(date_end.year, date_end.month, date_end.day,
+                             time_end.hour, time_end.minute) - timedelta(hours=10)
     if end_date_time.timestamp() - start_date_time.timestamp() < 0:
         st.error('Дата окончания действия должна быть больше даты начала')
         st.stop()

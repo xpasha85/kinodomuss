@@ -123,12 +123,15 @@ def set_custom_pass(start_time: datetime, end_time: datetime, name: str, is_rand
     }
     response = requests.post('https://euapi.ttlock.com/v3/keyboardPwd/add', data=data)
     r = response.json()
+    print(r)
     if not r.get('keyboardPwdId') is None:
         print(r.get('keyboardPwdId'))
         return {
             'status': 'ok',
             'password': password
         }
+    elif r.get('errcode') == -3007:
+        return texts.ErrorCodeExist
     else:
         return texts.ErrorGetPass
 
@@ -151,8 +154,10 @@ def del_one_pass(pass_id: str):
 
 
 def main():
-    print(set_custom_pass('27.10.2023 11:24', '27.10.2023 16:32', 'Вася 5. Тест'))
-    print(del_one_pass('361944756'))
+    sd = datetime(year=2023, month=10, day=29, hour=1, minute=50)
+    ed = datetime(year=2023, month=10, day=29, hour=4, minute=15)
+    print(set_custom_pass(sd, ed, 'Корейцы2', False, '3481345'))
+    # print(del_one_pass('361944756'))
 
 
 if __name__ == "__main__":
